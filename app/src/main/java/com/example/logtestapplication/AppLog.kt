@@ -11,16 +11,18 @@ data class AppLogModel(
     var action: ArrayList<ActivityAction> = actions
 }*/
 
-sealed class ActivityAction(val action: String, val time: Long, var data: String?) {
-    class InitAction : ActivityAction(IdleAction::class.java.simpleName, System.currentTimeMillis(), "init")
-    class IdleAction : ActivityAction(IdleAction::class.java.simpleName, System.currentTimeMillis(), "idle")
-    class EditAction : ActivityAction(EditAction::class.java.simpleName, System.currentTimeMillis(), "edited")
-    class AddNewAction : ActivityAction(AddNewAction::class.java.simpleName, System.currentTimeMillis(), "added new")
-    class DeleteAction : ActivityAction(DeleteAction::class.java.simpleName, System.currentTimeMillis(), "deleted")
-    class SwapAction : ActivityAction(SwapAction::class.java.simpleName, System.currentTimeMillis(), "swapped")
-    class DoneAction : ActivityAction(DoneAction::class.java.simpleName, System.currentTimeMillis(), "done")
-    class SendAction : ActivityAction(SendAction::class.java.simpleName, System.currentTimeMillis(), "send")
-    class ShareAction : ActivityAction(ShareAction::class.java.simpleName, System.currentTimeMillis(), "shared")
-    class CloneAction : ActivityAction(CloneAction::class.java.simpleName, System.currentTimeMillis(), "cloned")
-    class ColorPickAction : ActivityAction(ColorPickAction::class.java.simpleName, System.currentTimeMillis(), "myData")
+sealed class ActivityAction(val action: String, val time: Long, data: Any?) {
+    class InitAction(private val data: Any? = null) : ActivityAction(IdleAction::class.java.simpleName, System.currentTimeMillis(), data)
+    class IdleAction(private val data: Any? = null) : ActivityAction(IdleAction::class.java.simpleName, System.currentTimeMillis(), data)
+    class EditAction(private val data: Any? = null) : ActivityAction(EditAction::class.java.simpleName, System.currentTimeMillis(), data)
+    class AddNewAction(private val data: Any? = null) : ActivityAction(AddNewAction::class.java.simpleName, System.currentTimeMillis(), data)
+    class DeleteAction(private val data: Any? = null) : ActivityAction(DeleteAction::class.java.simpleName, System.currentTimeMillis(), data)
+    class SwapAction(private val data: Any? = null) : ActivityAction(SwapAction::class.java.simpleName, System.currentTimeMillis(), data)
+    class DoneAction(private val data: Any? = null) : ActivityAction(DoneAction::class.java.simpleName, System.currentTimeMillis(), data)
+    class SendAction(private val data: Any? = null) : ActivityAction(SendAction::class.java.simpleName, System.currentTimeMillis(), data)
+    class ShareAction(private val data: Any? = null) : ActivityAction(ShareAction::class.java.simpleName, System.currentTimeMillis(), data)
+    class CloneAction(private val data: Any? = null) : ActivityAction(CloneAction::class.java.simpleName, System.currentTimeMillis(), data)
+    class ColorPickAction(private val data: Any? = null) : ActivityAction(ColorPickAction::class.java.simpleName, System.currentTimeMillis(), data)
 }
+
+data class UserModel(val id: Long = System.currentTimeMillis(), var name: String = "a")
